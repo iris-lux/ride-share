@@ -9,8 +9,8 @@
 
 #I notice three layers:
 #1. The "table" of data that contains a series of rows.
-#2. Individual rows, each representing a single "ride."
-#3. The columns, which contain specific information about the rifr: the driver, the cost, the date, etc. 
+#2. Individual rows, each representing a single ride.
+#3. The columns, which contain specific information about the ride: the driver, the cost, the date, etc. 
 
 ########################################################
 # Step 2: Assign a data structure to each layer
@@ -19,8 +19,8 @@
 # determine what data structure each layer should have
 
 #1. The "table" of data that contains a series of rows. - An array
-#2. Individual rows, each representing a single "ride." - A hash
-#3. The columns, which contain specific information about the rifr: the driver, the cost, the date, etc. - key/value pairs. 
+#2. Individual rows, each representing a single ride. - A hash
+#3. The columns, which contain specific information about the ride: the driver, the cost, the date, etc. - key/value pairs. 
 ########################################################
 # Step 3: Make the data structure!
 
@@ -100,8 +100,9 @@ end
 
 def driver_best_payday(rides)
   best_paydays = {}
+  #Below creates a hash where each key is a driver ID, and each value is the full hash (row) containing the most expensive ride for that driver
   best_payday_rows = rides.group_by{|ride| ride[:driver_id].to_sym}.map{|driver, row| row.max_by{|ride| ride[:cost]}}
-
+        
   best_payday_rows.each do |row|
     best_paydays[row[:driver_id]] = row[:date]
   end
